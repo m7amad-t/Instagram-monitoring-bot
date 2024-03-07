@@ -30,6 +30,12 @@
     <li>Modify the <code>username</code> variable in the script to specify the Instagram username you want to monitor.</li>
     <li>Update the <code>headers</code> variable in the script with the necessary headers (cookies) obtained from inspecting the Instagram API request in your browser.</li>
   </ol>
+  <h2>Notes</h2>
+    <ol>
+      <li>Go to <a href="https://t.me/BotFather">Bot_father</a> crate a bot then copy your bot's <code>BOT_TOKEN</code>, replace it.</li>
+      <li>Go to <a href="https://t.me/RawDataBot">Row_data_bot</a> send <code>/start</code> get your  <code>CHAT_ID</code>, replace it.</li>
+      <li>Go to Instagram, login to an account then go to the profile that you want to follow. open inspect <code>(click right -> inspect)</code> or <code>(Ctrl+Shift+j)</code> go to <Strong>Network</Strong> filter only XHR files find this Request "<strong> <i>https://www.instagram.com/api/v1/users/web_profile_info/?username=_____</i> </strong>" then copy <code>Request Headers</code>, replace it.</li>
+    </ol>
   
   <h2>Techniques and Technologies Used</h2>
   <p>The Instagram Profile Monitor Bot utilizes several techniques and technologies to achieve its functionality:</p>
