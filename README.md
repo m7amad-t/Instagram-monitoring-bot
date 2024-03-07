@@ -28,9 +28,9 @@
     </ol>
     <h2>Notes</h2>
     <ol>
-      <li>Go to <a href="https://t.me/BotFather">Bot_father</a> crate a bot then copy your bot's <code>BOT_TOKEN</code> for later use.</li>
-      <li>Go to <a href="https://t.me/RawDataBot">Row_data_bot</a> send <code>/start</code> get your  <code>CHAT_ID</code> for later use.</li>
-      <li>Go to Instagram, login to an account then go to the profile that you want to follow. open inspect <code>(click right -> inspect)</code> or <code>(Ctrl+Shift+j)</code> go to <Strong>Network</Strong> filter only XHR files find this Request "<strong> <i>https://www.instagram.com/api/v1/users/web_profile_info/?username=_____</i> </strong>" then copy <code>Request Headers</code> for later use.</li>
+      <li>Go to <a href="https://t.me/BotFather">Bot_father</a> crate a bot then copy your bot's <code>BOT_TOKEN</code>, replace it.</li>
+      <li>Go to <a href="https://t.me/RawDataBot">Row_data_bot</a> send <code>/start</code> get your  <code>CHAT_ID</code>, replace it.</li>
+      <li>Go to Instagram, login to an account then go to the profile that you want to follow. open inspect <code>(click right -> inspect)</code> or <code>(Ctrl+Shift+j)</code> go to <Strong>Network</Strong> filter only XHR files find this Request "<strong> <i>https://www.instagram.com/api/v1/users/web_profile_info/?username=_____</i> </strong>" then copy <code>Request Headers</code>, replace it.</li>
     </ol>
     <h2>Usage</h2>
     <p>Run the script using Python:</p>
