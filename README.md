@@ -42,10 +42,15 @@
   <p>The Instagram Profile Monitor Bot utilizes several techniques and technologies to achieve its functionality:</p>
   <ol>
     <li><strong>Reverse Engineering Instagram's API:</strong> The project involves reverse engineering Instagram's API to understand its communication protocol and endpoints.</li>
+    <br>
     <li><strong>Network Traffic Analysis:</strong> Network traffic analysis is used to capture and inspect HTTP requests and responses exchanged between the client application and Instagram's servers.</li>
+    <br>
     <li><strong>Python Scripting:</strong> Python is used as the primary programming language for developing the monitoring bot, leveraging its libraries for making HTTP requests, data manipulation, and bot functionality.</li>
+    <br>
     <li><strong>Telegram Bot Integration:</strong> The bot integrates with the Telegram Bot API to send real-time notifications to users when changes are detected in monitored profiles.</li>
+    <br>
     <li><strong>Periodic Monitoring and Notification:</strong> The bot is designed to periodically fetch profile data from Instagram's API and send notifications via Telegram when changes are detected.</li>
+    <br>
     <li><strong>Security and Privacy Considerations:</strong> Measures are taken to ensure the secure handling of user data and compliance with Instagram's terms of service and usage agreements.</li>
   </ol>
   <br><br>
