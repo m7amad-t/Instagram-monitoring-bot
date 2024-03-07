@@ -12,7 +12,7 @@
     <h2>Prerequisites</h2>
     <ul>
       <li>Python 3.x installed on your system.</li>
-      <li>Required Python packages: <code>requests</code>, <code>timeago</code>.</li>
+      <li>Required Python packages: <code>requests</code>, <code>time</code>.</li>
     </ul>
     <h2>Installation</h2>
     <ol>
