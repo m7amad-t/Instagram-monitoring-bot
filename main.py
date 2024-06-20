@@ -3,6 +3,9 @@ import time
 import requests
 
 
+from PIL import Image
+from io import BytesIO
+
 # instagram profile module
 class InstagramProfile:
 
@@ -48,19 +51,70 @@ class InstagramProfile:
         return result
 
 
+def fetch_image(url):
+   try:
+       response = requests.get(url)
+       response.raise_for_status()  # Raise an HTTPError for bad responses
+       image = Image.open(BytesIO(response.content))
+       return image      
+   except requests.exceptions.RequestException as e:
+       print(f"Error fetching image from URL: {url}\nException: {e}")
+       send_message('error fetching image from URL')
+       return None
+   
+def image_checker(img1 , img2)   :
+    return list(img1.getdata()) == list(img2.getdata())
+   
+   
+def check_images(oldURL , newURL):
+    image = fetch_image(oldURL)
+    image2 = fetch_image(newURL)
+    if not image :
+        send_message('Fiald to load old image ')
+        return False  
+    if not image2 :
+        send_message('Fiald to load new image ')
+        return False
+    
+    res = image_checker(image , image2)
+    return res 
+   
 # todo: Replace BOT_TOKEN, CHAT_ID, USERNAME and HEADERS
 # for telegram
-bot_token = "YOUR_BOT_TOKEN"
-chat_id = "YOUR_CHAT_ID"
+bot_token = "6780109825:AAHK09h0UrteD01ua0NWFHdKW2OOyqZsfos"
+chat_id = "1959645938"
 
 
 # instagram username that you want to monitor :  for endpoint
-username = "INSTAGRAM_USERNAME"
+username = "rosieberosses"
+
 
 
 # necessary headers (cockies) for endpoint
-headers = {}
 
+
+newHeaders = {
+    'Accept': '*/*',
+    'Accept-Encoding': 'gzip, deflate, br',
+    'Accept-Language': 'en-US,en;q=0.6',
+    'Cookie': 'ig_did=0C826C21-17C3-444A-ABB7-EBABD37214D7; dpr=1.25; ps_l=0; ps_n=0; mid=Zdn36QALAAEqyJz_3AUlfFs99nTT; datr=DPjZZSkw2lw5o4-RoWWaoglQ; csrftoken=pQiCZ2XqZiiUa7ZPWdUXUZtv8EVuECc2; ds_user_id=65148761839; sessionid=65148761839%3Au9CEtqxE2TuIvk%3A29%3AAYdG7ppiuI7UTS_STJRJmdNQb3qncIqbdK4ThF-fIA; rur="LDC\05465148761839\0541740320991:01f7e21808f28f1cfb433f66fffa031c2582db858cce44a2582dd6b75532e526a4e6c16f"',
+    'Referer': 'https://www.instagram.com/rosieberosses/',
+    'Sec-Ch-Ua': '"Not A(Brand";v="99", "Brave";v="121", "Chromium";v="121"',
+    'Sec-Ch-Ua-Mobile': '?0',
+    'Sec-Ch-Ua-Model': '""',
+    'Sec-Ch-Ua-Platform': '"Windows"',
+    'Sec-Ch-Ua-Platform-Version': '"10.0.0"',
+    'Sec-Fetch-Dest': 'empty',
+    'Sec-Fetch-Mode': 'cors',
+    'Sec-Fetch-Site': 'same-origin',
+    'Sec-Gpc': '1',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
+    'X-Asbd-Id': '129477',
+    'X-Csrftoken': 'pQiCZ2XqZiiUa7ZPWdUXUZtv8EVuECc2',
+    'X-Ig-App-Id': '936619743392459',
+    'X-Ig-Www-Claim': 'hmac.AR3bYKYFG-5DhUWwDxQrfpAFZhjcBskaxmGhB7_Pty-dNa0f',
+    'X-Requested-With': 'XMLHttpRequest'
+}
 
 # profile url
 monitored_profile = f"https://www.instagram.com/{username}/"
@@ -87,7 +141,7 @@ def fetch_data():
     print("fetching data")
     try:
         # Make a GET request to the endpoint with the specified headers
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, headers=newHeaders)
         if response.status_code == 200:
             return InstagramProfile(response.json())
         else:
@@ -159,11 +213,15 @@ def checkInfo(new_data, old_data):
         )
 
     if new_data.profile_picture_hd != old_data.profile_picture_hd:
-        print("attention : profile pictuer have been changed")
-        result = False
-        send_message(
-            f"Profile Picture is changed to  :\n{new_data.profile_picture_hd}\n\nold one is :\n{old_data.profile_picture_hd}.\n\n{monitored_profile}"
-        )
+        
+        imageNotChanged = check_images(old_data.profile_picture_hd  , new_data.profile_picture_hd)
+        if imageNotChanged : 
+            print("attention : profile pictuer have been changed")
+            result = False
+            send_message(
+                f"Profile Picture is changed to  :\n{new_data.profile_picture_hd}\n\nold one is :\n{old_data.profile_picture_hd}.\n\n{monitored_profile}"
+            )    
+        
 
     if new_data.getLinks() != old_data.getLinks():
         print("attention : Extrnal links have been changed")
